@@ -1,7 +1,7 @@
 import { nanoid } from '@reduxjs/toolkit'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addNewPost } from './postsSlice'
+import { useAddNewPostMutation } from '../api/apiSlice'
 import { selectAllUsers } from '../users/usersSlice'
 
 export const AddPostForm = () => {
@@ -13,8 +13,9 @@ export const AddPostForm = () => {
   const dispatch = useDispatch()
   const users = useSelector(selectAllUsers)
 
-  const canSave =
-    [title, content, userId].every(Boolean) && addRequestStatus === 'idle'
+  const [addNewPost, { isLoading }] = useAddNewPostMutation()
+
+  const canSave = [title, content, userId].every(Boolean) && !isLoading
 
   const onTitleChanged = (e) => setTitle(e.target.value)
   const onContentChanged = (e) => setContent(e.target.value)
@@ -23,7 +24,7 @@ export const AddPostForm = () => {
     if (canSave) {
       try {
         setAddRequestStatus('pending')
-        await dispatch(addNewPost({ title, content, user: userId })).unwrap()
+        await addNewPost({ title, content, user: userId }).unwrap()
         setTitle('')
         setContent('')
         setUserId('')
