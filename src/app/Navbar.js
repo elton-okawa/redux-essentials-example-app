@@ -9,8 +9,6 @@ import {
 } from '../features/notifications/notificationsSlice'
 
 export const Navbar = () => {
-  const notifications = useSelector(selectAllNotifications)
-
   const dispatch = useDispatch()
 
   // Trigger initial fetch of notifications and keep the websocket open to receive updates

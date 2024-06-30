@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-import { postUpdated, selectPostById } from './postsSlice'
 import { useEditPostMutation, useGetPostQuery } from '../api/apiSlice'
 
 export const EditPostForm = ({ match }) => {

@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { selectUserById } from '../users/usersSlice'
-import { selectPostsByUser } from '../posts/postsSlice'
 
 export const UserPage = ({ match }) => {
   const { userId } = match.params
